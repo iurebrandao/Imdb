@@ -14,17 +14,17 @@ public class TrabalhoArtistico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	
+	private Long id;
+
 	@Column
 	private String titulo;
-	
+
 	@Column
 	private int ano;
-	
+
 	@ManyToOne
 	private Genero genero;
-	
+
 	@ManyToOne
 	private Autor autor;
 

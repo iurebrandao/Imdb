@@ -4,8 +4,7 @@ import br.unb.cic.imdb.integracao.DAOFactory;
 import br.unb.cic.imdb.integracao.DAOGenero;
 
 /**
- * Implementacao da classe abstrata DAOFactory 
- * com persistencia via JPA. 
+ * Implementacao da classe abstrata DAOFactory com persistencia via JPA.
  * 
  * @author rbonifacio
  */

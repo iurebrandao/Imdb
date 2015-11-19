@@ -8,16 +8,15 @@ import br.unb.cic.imdb.integracao.DAOGenero;
 import br.unb.cic.imdb.negocio.Genero;
 
 /**
- * Implementacao da interface DAOGenero usando 
- * a tecnologia JPA, tendo como uma das implementacoes 
- * o Hibernate. 
+ * Implementacao da interface DAOGenero usando a tecnologia JPA, tendo como uma
+ * das implementacoes o Hibernate.
  * 
  * @author rbonifacio
  */
 public class DAOGeneroJPA implements DAOGenero {
 
-	private EntityManager em; 
-	
+	private EntityManager em;
+
 	@Override
 	public void salvar(Genero genero) {
 		em = EMFactoryHelper.instance().getFactory().createEntityManager();
@@ -35,7 +34,8 @@ public class DAOGeneroJPA implements DAOGenero {
 	@Override
 	public Genero recuperaPorTitulo(String titulo) {
 		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		List<Genero> generos = em.createQuery("FROM Genero WHERE titulo = :tituloParam").setParameter("tituloParam", titulo).getResultList();
-		return generos.size() == 1 ? generos.get(0): null;
+		List<Genero> generos = em.createQuery("FROM Genero WHERE titulo = :tituloParam")
+				.setParameter("tituloParam", titulo).getResultList();
+		return generos.size() == 1 ? generos.get(0) : null;
 	}
 }

@@ -7,22 +7,23 @@ import br.unb.cic.imdb.negocio.IMDBFacade;
 
 public class ContextoID {
 
-	private ContextoID() { } 
-	
+	private ContextoID() {
+	}
+
 	private static ContextoID instance;
-	private IMDBFacade facade; 
-	
+	private IMDBFacade facade;
+
 	public static ContextoID instance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new ContextoID();
 		}
-		return instance; 
+		return instance;
 	}
-	
+
 	public IMDBFacade facade() {
-		if(facade == null) {
+		if (facade == null) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-			facade = (IMDBFacade)context.getBean("facade");
+			facade = (IMDBFacade) context.getBean("facade");
 		}
 		return facade;
 	}
