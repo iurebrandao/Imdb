@@ -13,17 +13,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_AUTOR")
 public class Autor {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	@Column
 	private String nome;
-
 	@Column
 	private String descricao;
-
 	@OneToMany(mappedBy = "autor")
 	private List<TrabalhoArtistico> producaoArtistica;
 
