@@ -1,5 +1,6 @@
 package br.unb.cic.imdb.interfacegrafica;
 
+import br.unb.cic.imdb.controle.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Collections;
@@ -11,7 +12,9 @@ public class TelaLogin extends JFrame {
 	private JTextField Login;
 	private JPasswordField Senha;
 	private JButton fazerLogin;
-
+	private Controle controle;
+	private String login,senha;
+	
 	public TelaLogin() {
 
 		super("Login");
@@ -97,9 +100,8 @@ public class TelaLogin extends JFrame {
 		}
 	}
 
-	// Classe interna que trata evento de teclado para caso o usuï¿½rio apertar
-	// a tecla
-	// TAB, vï¿½ para o campo Senha e a borda desse campo fique vermelha.
+	// Classe interna que trata evento de teclado para caso o usuario apertar
+	// a tecla TAB, va para o campo Senha e a borda desse campo fique vermelha.
 	private class myKeyListener implements KeyListener {
 		public void keyPressed(KeyEvent event) {
 			if (event.getKeyCode() == KeyEvent.VK_TAB) {
@@ -126,22 +128,25 @@ public class TelaLogin extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource() == fazerLogin) {
-				TelaLogin.this.dispose();
-				System.out.println("login = "+ Login.getText());
-				System.out.println("senha = "+Senha.getText());
-				JanelaLogin(1);
+
+				login = Login.getText();
+				senha = Senha.getText();
+				System.out.println("login = "+login);
+				System.out.println("senha = "+senha);
+				
+				JanelaOpcao(controle.realizarLogin(login,senha));
 			}
 		}
 	}
 
 	// Metodo, que a partir da opcao de login que o controle retornar, mostra a
 	// mensagem
-	// adequada ou executa o login do usuario/admin
-	public void JanelaLogin(int opcao) {
+	// adequada ou executa o login do usuario
+	public void JanelaOpcao(int opcao) {
 		switch (opcao) {
 
-		// Mostra que o cadastro nao foi encontrado e mantem a janela do Login
-		case 0:
+		// Mostra que o login e/ou senha estão incorretos e mantem a janela do login
+		case -1:
 			JOptionPane.showMessageDialog(null, "Login e/ou senha incorreto(s). Nao foi possivel efetuar o login",
 					"Erro", JOptionPane.ERROR_MESSAGE);
 			break;
@@ -149,6 +154,7 @@ public class TelaLogin extends JFrame {
 		// Abre a janela de usuario e fecha a do Login
 		case 1:
 			TelaLogin.this.dispose();
+			new TelaUsuario(controle);
 			break;
 			
 		default:
