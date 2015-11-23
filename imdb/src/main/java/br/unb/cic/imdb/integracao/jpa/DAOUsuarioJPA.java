@@ -1,7 +1,10 @@
 package br.unb.cic.imdb.integracao.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import br.unb.cic.imdb.integracao.DAOUsuario;
@@ -10,7 +13,9 @@ import br.unb.cic.imdb.negocio.Usuario;
 
 public class DAOUsuarioJPA implements DAOUsuario {
 	
-	private EntityManager em;
+	private static EntityManagerFactory emf;
+	private static EntityManager em;
+	private static EntityTransaction tx;
 	
 	@Override
 	public boolean inserir(Usuario usuario) {
@@ -58,6 +63,20 @@ public class DAOUsuarioJPA implements DAOUsuario {
 		} catch (IllegalArgumentException | NoResultException e) {
 			return null;
 		}
+	}
+	
+	
+	public static void comecarOperacoes() {
+		emf = Persistence.createEntityManagerFactory("Midas");
+		em = emf.createEntityManager();
+		tx = em.getTransaction();
+		tx.begin();
+	}
+	
+	public static void finalizarOperacoes(){
+		tx.commit();
+		em.close(); 
+		emf.close();
 	}
 
 }

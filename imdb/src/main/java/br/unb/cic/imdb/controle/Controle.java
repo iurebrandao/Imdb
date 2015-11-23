@@ -1,16 +1,16 @@
 package br.unb.cic.imdb.controle;
-import br.unb.cic.imdb.usuario.*;
+import br.unb.cic.imdb.integracao.jpa.DAOUsuarioJPA;
+import br.unb.cic.imdb.negocio.Usuario;
 
 public class Controle {
 	
-	private UsuarioDAO bancoDeDadosUsuario;
+	private DAOUsuarioJPA bancoDeDadosUsuario;
 	
 	public int realizarLogin(String login, String senha){
-		System.out.println("Entrou");
 		
-		UsuarioDAO.comecarOperacoes();
+		DAOUsuarioJPA.comecarOperacoes();
 		Usuario usuario = bancoDeDadosUsuario.recuperar(login);
-		UsuarioDAO.finalizarOperacoes();
+		DAOUsuarioJPA.finalizarOperacoes();
 		if(usuario == null){
 			return -1;
 		} else if((usuario.getSenha().equals(senha))) {

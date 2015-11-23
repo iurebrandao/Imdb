@@ -17,6 +17,4 @@ public interface DAOUsuario {
 	
 	public Usuario recuperar(String login);
 	
-	
-	
 }
