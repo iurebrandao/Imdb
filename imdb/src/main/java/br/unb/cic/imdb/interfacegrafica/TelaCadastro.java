@@ -13,7 +13,7 @@ import br.unb.cic.imdb.controle.Controle;
 import br.unb.cic.imdb.negocio.Usuario;
 
 
-public class CadastroUsuario extends JFrame{
+public class TelaCadastro extends JFrame{
 	
 	private Controle controle;
 	private JTextField nome,login;
@@ -29,7 +29,7 @@ public class CadastroUsuario extends JFrame{
 	private Font FonteUsual,FonteItalico;
 	private Usuario usuario; // Armazena as informaÃ§Ãµes do novo usuÃ¡rio
 
-	public CadastroUsuario(Controle controle){
+	public TelaCadastro(Controle controle){
 		this.controle = controle;
 		this.setLayout(null);
 		this.setBounds(530, 140,400,370);
@@ -193,7 +193,7 @@ public class CadastroUsuario extends JFrame{
 		public void actionPerformed(ActionEvent event) {
 //			O usuario apertou em voltar
 			if (event.getSource() == voltar) {
-				CadastroUsuario.this.dispose();
+				TelaCadastro.this.dispose();
 				new TelaInicial(controle);
 			}
 			
@@ -218,7 +218,7 @@ public class CadastroUsuario extends JFrame{
 					valida = false;   //Se a variavel booleana "valida", for true, entao o cadastro pode ser realizado
 				
 				if (valida) {
-					CadastroUsuario.this.dispose();
+					TelaCadastro.this.dispose();
 					// Envia a novo cadastro e notifica se foi enviado com sucesso
 					
 					if(controle.enviarCadastro(usuario)){

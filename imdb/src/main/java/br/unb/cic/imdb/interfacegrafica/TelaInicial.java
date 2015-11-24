@@ -65,7 +65,7 @@ public class TelaInicial extends JFrame{
 //				Fecha a janela com as opcoes de ja possuir ou requisitar cadastro
 				
 //				Cria um frame da classe Cadastro_Usuario, classe que mostra a janela de cadastro
-				new CadastroUsuario(controle); 
+				new TelaCadastro(controle); 
 			}
 		}
 	}
