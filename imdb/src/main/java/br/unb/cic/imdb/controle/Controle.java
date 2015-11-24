@@ -18,4 +18,12 @@ public class Controle {
 		}
 		return -1;
 	}
+	
+	public boolean enviarCadastro(Usuario novoUsuario){
+		DAOUsuarioJPA.comecarOperacoes();
+		boolean sucesso = bancoDeDadosUsuario.inserir(novoUsuario);
+		DAOUsuarioJPA.finalizarOperacoes();
+		return sucesso;
+	}
+	
 }

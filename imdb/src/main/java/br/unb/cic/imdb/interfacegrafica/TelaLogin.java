@@ -11,40 +11,46 @@ public class TelaLogin extends JFrame {
 	private JLabel campoLogin, campoSenha;
 	private JTextField Login;
 	private JPasswordField Senha;
-	private JButton fazerLogin;
+	private JButton fazerLogin,voltar;
 	private Controle controle;
 	private String login,senha;
 	
-	public TelaLogin() {
+	public TelaLogin(Controle controle) {
 
 		super("Login");
 		this.setLayout(null);
-		this.setLocation(500, 200); // Posicionar o layout no lugar desejado da
-									// tela
-
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setBounds(500, 200,320,230); // Posicionar o layout no lugar desejado da tela
+		this.controle = controle;
+		
 		campoLogin = new JLabel("Login: ");
-		campoLogin.setBounds(120, 1, 70, 70);
+		campoLogin.setBounds(20, 1, 70, 70);
 
 		add(campoLogin);
 		// Constroi o Login com 10 colunas
 		Login = new JTextField("", 13);
 		Login.setBorder(BorderFactory.createLineBorder(Color.red));
-		Login.setBounds(250, 20, 200, 30);
+		Login.setBounds(80, 20, 200, 30);
 
 		add(Login); // Adiciona Login1 ao JFrame
 		Login.setToolTipText("Insira o seu login");
 
 		campoSenha = new JLabel("Senha: ");
-		campoSenha.setBounds(120, 42, 70, 70);
+		campoSenha.setBounds(20, 42, 70, 70);
 		add(campoSenha);
 		Senha = new JPasswordField("", 10);
 		Senha.setBorder(BorderFactory.createLineBorder(Color.gray));
-		Senha.setBounds(250, 60, 200, 30);
+		Senha.setBounds(80, 60, 200, 30);
 		add(Senha);
 		Senha.setToolTipText("Insira a sua senha");
-
+		
+		voltar = new JButton("Voltar");
+		voltar.setBounds(25,120,80,35);
+		add(voltar);
+		
 		fazerLogin = new JButton("Fazer Login");
-		fazerLogin.setBounds(140, 110, 200, 30);
+		fazerLogin.setBounds(125, 120, 150, 35);
 		add(fazerLogin);
 
 		// Manipulador de evento de mouse
@@ -55,16 +61,15 @@ public class TelaLogin extends JFrame {
 		// Manipulador de evento de botao
 		ButtonHandler handler_botao = new ButtonHandler();
 		fazerLogin.addActionListener(handler_botao);
-
+		voltar.addActionListener(handler_botao);
+		
 		// Manipulador de teclado
 		Login.addKeyListener(new myKeyListener());
 		Login.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
 		Senha.addKeyListener(new myKeyListener());
 		Senha.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(500, 200);
-		this.setVisible(true);
+		
 	}
 
 	// Classe interna para tratamento de mouse, para caso o usuario clicar em um
@@ -126,7 +131,12 @@ public class TelaLogin extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		// trata evento de botao
 		public void actionPerformed(ActionEvent event) {
-
+//			O usuario apertou em voltar
+			if (event.getSource() == voltar) {
+				TelaLogin.this.dispose();
+				new TelaInicial(controle);
+			}
+			
 			if (event.getSource() == fazerLogin) {
 
 				login = Login.getText();
@@ -145,7 +155,7 @@ public class TelaLogin extends JFrame {
 	public void JanelaOpcao(int opcao) {
 		switch (opcao) {
 
-		// Mostra que o login e/ou senha estão incorretos e mantem a janela do login
+		// Mostra que o login e/ou senha estï¿½o incorretos e mantem a janela do login
 		case -1:
 			JOptionPane.showMessageDialog(null, "Login e/ou senha incorreto(s). Nao foi possivel efetuar o login",
 					"Erro", JOptionPane.ERROR_MESSAGE);

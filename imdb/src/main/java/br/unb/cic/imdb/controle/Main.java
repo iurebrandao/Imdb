@@ -1,7 +1,7 @@
 package br.unb.cic.imdb.controle;
 
 import javax.swing.*;
-import br.unb.cic.imdb.interfacegrafica.TelaLogin;
+import br.unb.cic.imdb.interfacegrafica.*;
 
 public class Main {
 
@@ -12,12 +12,9 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Erro ao definir modo de compatibilidade com a plataforma MAC OS");
 		}
-		mensagem();
-		TelaLogin login = new TelaLogin();
+		Controle controle = new Controle();
+		JOptionPane.showMessageDialog(null,"     Bem-vindo ao IMDB!");
+		new TelaInicial(controle);
 	}
 	
-	public static void mensagem(){
-		JOptionPane.showMessageDialog(null,"                          Bem-vindo ao IMDB!\n "
-				+ "Para ter acesso ao programa, digite seu login e senha.");
-	}
 }
