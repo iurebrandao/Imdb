@@ -207,7 +207,6 @@ public class CadastroUsuario extends JFrame{
 				} catch (ParseException e) {
 					valida = false;
 				}
-				
 				usuario.setNome(nome.getText());
 				usuario.setLogin(login.getText());
 				usuario.setSenha(senha.getText());
@@ -230,10 +229,10 @@ public class CadastroUsuario extends JFrame{
 						JOptionPane.showMessageDialog(null, "Falha ao enviar o cadastro");
 				}
 
-//				Se a variavel booleana "valida", for false, entao o cadastro nao pode ser realizado
-			else{
-					JOptionPane.showMessageDialog(null, "Nao foi possivel realizar o cadastro. Tente novamente", "Cadastro",
-							JOptionPane.ERROR_MESSAGE);
+				//Se a variavel booleana "valida", for false, entao o cadastro nao pode ser realizado
+				else{
+						JOptionPane.showMessageDialog(null, "Nao foi possivel realizar o cadastro. Tente novamente", "Cadastro",
+								JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}

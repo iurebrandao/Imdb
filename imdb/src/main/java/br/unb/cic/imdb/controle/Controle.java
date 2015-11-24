@@ -21,6 +21,8 @@ public class Controle {
 	
 	public boolean enviarCadastro(Usuario novoUsuario){
 		DAOUsuarioJPA.comecarOperacoes();
+		System.out.println(novoUsuario.getNome()+novoUsuario.getLogin()+novoUsuario.getSenha()+novoUsuario.getDataNasc());
+		
 		boolean sucesso = bancoDeDadosUsuario.inserir(novoUsuario);
 		DAOUsuarioJPA.finalizarOperacoes();
 		return sucesso;

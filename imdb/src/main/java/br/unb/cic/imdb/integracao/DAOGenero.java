@@ -16,4 +16,5 @@ public interface DAOGenero {
 	public List<Genero> recuperaTodos();
 
 	public Genero recuperaPorTitulo(String titulo);
+	
 }

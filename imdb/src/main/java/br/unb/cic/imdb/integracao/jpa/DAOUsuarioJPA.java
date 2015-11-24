@@ -47,8 +47,6 @@ public class DAOUsuarioJPA implements DAOUsuario {
 			em.getTransaction().rollback();
 			return false;
 		}
-		
-	
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class DAOUsuarioJPA implements DAOUsuario {
 	
 	
 	public static void comecarOperacoes() {
-		emf = Persistence.createEntityManagerFactory("Midas");
+		emf = Persistence.createEntityManagerFactory("Imdb");
 		em = emf.createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
