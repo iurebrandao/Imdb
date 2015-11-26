@@ -15,6 +15,6 @@ public interface DAOUsuario {
 	
 	public boolean remover(String login);
 	
-	public Usuario recuperar(String login);
+	public Usuario recuperarPorNome(String login);
 	
 }

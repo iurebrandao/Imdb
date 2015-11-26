@@ -7,39 +7,42 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
+import javax.transaction.Transactional;
+
 import br.unb.cic.imdb.integracao.DAOUsuario;
 import br.unb.cic.imdb.negocio.Usuario;
 
 
 public class DAOUsuarioJPA implements DAOUsuario {
 	
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
-	private static EntityTransaction tx;
+	private EntityManager em;
 	
-	@Override
+	
+   	@Override
+   	@Transactional
 	public boolean inserir(Usuario usuario) {
-		
 		try {
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
 			em.getTransaction().begin();
 			em.persist(usuario);
 			em.getTransaction().commit();
-			return true; 
+			return true;
 			
-		}catch(RollbackException e){
-			System.err.println("Usuario nao cadastrado");
+		} catch (RollbackException e) {
+			System.err.println("Nao foi possivel realizar o cadastro!");
 			return false;
 		}
 	}
 
 	@Override
+	@Transactional
 	public boolean remover(String login) {
 		
 		try {
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
 			em.getTransaction().begin();
-			em.remove(recuperar(login));
+			em.remove(recuperarPorNome(login));
+			em.flush();
 			em.getTransaction().commit();
 			return true;
 			
@@ -50,31 +53,16 @@ public class DAOUsuarioJPA implements DAOUsuario {
 	}
 
 	@Override
-	public Usuario recuperar(String login) {
+	public Usuario recuperarPorNome(String login) {
 		
 		try {
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
-			Query q = em.createQuery("select u from Usuario u where u.login = :login_usuario", Usuario.class);
-			q.setParameter("login_usuario", login);
+			Query q = em.createQuery("select u from Usuario u where u.login = :login", Usuario.class);
+			q.setParameter("login", login);
 			return (Usuario) q.getSingleResult();
 			
 		} catch (IllegalArgumentException | NoResultException e) {
 			return null;
 		}
 	}
-	
-	
-	public static void comecarOperacoes() {
-		emf = Persistence.createEntityManagerFactory("Imdb");
-		em = emf.createEntityManager();
-		tx = em.getTransaction();
-		tx.begin();
-	}
-	
-	public static void finalizarOperacoes(){
-		tx.commit();
-		em.close(); 
-		emf.close();
-	}
-
 }

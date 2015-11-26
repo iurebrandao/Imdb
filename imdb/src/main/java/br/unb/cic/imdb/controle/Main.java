@@ -15,6 +15,7 @@ public class Main {
 		Controle controle = new Controle();
 		JOptionPane.showMessageDialog(null,"     Bem-vindo ao IMDB!");
 		new TelaInicial(controle);
+	
 	}
 	
 }

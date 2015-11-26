@@ -27,7 +27,7 @@ public class TelaCadastro extends JFrame{
 	private final int tamData= 31,tamMes=12,tamAno=115;
 	int i;
 	private Font FonteUsual,FonteItalico;
-	private Usuario usuario; // Armazena as informaÃ§Ãµes do novo usuÃ¡rio
+	private Usuario usuario; // Armazena as informacoes do novo usuario
 
 	public TelaCadastro(Controle controle){
 		this.controle = controle;
@@ -59,7 +59,7 @@ public class TelaCadastro extends JFrame{
 		nome = new JTextField("Nome Completo", 20);
 		nome.setFont(FonteItalico);
 		nome.setToolTipText("Insira aqui seu nome completo"); // Dicas que aparecem quando o passar o mouse por cima
-		nome.setBounds(100,20,185,40); // Definindo o tamanho do campo e o lugar que ficarÃ¡ no frame
+		nome.setBounds(100,20,185,40); // Definindo o tamanho do campo e o lugar que ficarao no frame
 		add(nome);
 
 		login = new JTextField("Login", 20);
@@ -73,7 +73,7 @@ public class TelaCadastro extends JFrame{
 		add(campoSenha);
 		senha = new JPasswordField("****", 20);
 		senha.setBounds(100,140,185,40);
-		senha.setToolTipText("Digite sua senha"); // refazer com o pessoal de seguranÃƒÂ§a
+		senha.setToolTipText("Digite sua senha"); // refazer com o pessoal de seguranca
 		add(senha);
 		
 		campoNascimento = new JLabel(" Data de nascimento: ");

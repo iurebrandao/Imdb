@@ -11,7 +11,7 @@ public class FaixaMusical {
 	@Column
 	private String titulo;
 	@Column
-	private int duracao;
+	private Integer duracao;
 
 	public String getTitulo() {
 		return titulo;

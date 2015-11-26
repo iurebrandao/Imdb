@@ -15,7 +15,7 @@ public class EMFactoryHelper {
 	private static EMFactoryHelper instance;
 
 	private EMFactoryHelper() {
-		factory = Persistence.createEntityManagerFactory("imdb");
+		factory = Persistence.createEntityManagerFactory("Imdb");
 	}
 
 	public static EMFactoryHelper instance() {

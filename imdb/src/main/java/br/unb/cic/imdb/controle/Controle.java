@@ -4,13 +4,11 @@ import br.unb.cic.imdb.negocio.Usuario;
 
 public class Controle {
 	
-	private DAOUsuarioJPA bancoDeDadosUsuario;
+	private DAOUsuarioJPA bancoDeDadosUsuario = new DAOUsuarioJPA();
 	
 	public int realizarLogin(String login, String senha){
 		
-		DAOUsuarioJPA.comecarOperacoes();
-		Usuario usuario = bancoDeDadosUsuario.recuperar(login);
-		DAOUsuarioJPA.finalizarOperacoes();
+		Usuario usuario = bancoDeDadosUsuario.recuperarPorNome(login);
 		if(usuario == null){
 			return -1;
 		} else if((usuario.getSenha().equals(senha))) {
@@ -20,11 +18,10 @@ public class Controle {
 	}
 	
 	public boolean enviarCadastro(Usuario novoUsuario){
-		DAOUsuarioJPA.comecarOperacoes();
-		System.out.println(novoUsuario.getNome()+novoUsuario.getLogin()+novoUsuario.getSenha()+novoUsuario.getDataNasc());
 		
+		System.out.println(novoUsuario.getNome() + novoUsuario.getLogin() + novoUsuario.getSenha() + novoUsuario.getDataNasc());
 		boolean sucesso = bancoDeDadosUsuario.inserir(novoUsuario);
-		DAOUsuarioJPA.finalizarOperacoes();
+		
 		return sucesso;
 	}
 	
