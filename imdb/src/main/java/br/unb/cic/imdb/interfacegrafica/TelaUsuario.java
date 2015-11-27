@@ -98,6 +98,8 @@ public class TelaUsuario extends JFrame{
 			// Pesquisar trabalhos artisticos			
 			if(event.getSource() == pesquisarTrab){
 				System.out.println(trabalhoArtistico.getText());
+				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText());
+				telaTrab.desenhaNaTela();
 			}
 
 			// Pesquisar autores			
