@@ -14,6 +14,8 @@ public class TelaUsuario extends JFrame{
 	private JTextField trabalhoArtistico,autor,genero;
 	private JLabel pesquisar;
 	private JButton pesquisarTrab,pesquisarAutor,pesquisarGenero,sairDaConta,sairPrograma;
+	private JButton listarTrab,listarAutor,listarGenero;
+	
 	public TelaUsuario(Controle controle){
 		super("Tela usuario");
 		this.controle = controle;
@@ -24,44 +26,56 @@ public class TelaUsuario extends JFrame{
 		JOptionPane.showMessageDialog(null, espaco+"Login realizado! \n","Usuario",JOptionPane.DEFAULT_OPTION);
 		this.setVisible(true);
 		
-		pesquisar = new JLabel("Pesquise logo abaixo o trabalho artístico desejado:");
-		pesquisar.setBounds(60,5,290,70);
+		pesquisar = new JLabel("Pesquise logo abaixo o trabalho artístico desejado ou liste todos:");
+		pesquisar.setBounds(10,5,370,70);
 		add(pesquisar);
 		
 		trabalhoArtistico = new JTextField("Trabalho Artistico");
-		trabalhoArtistico.setBounds(60,70,170,35);
+		trabalhoArtistico.setBounds(10,70,170,35);
 		trabalhoArtistico.setToolTipText("Pesquise o trabalho artistico desejado");
 		add(trabalhoArtistico);
 		
 		pesquisarTrab = new JButton("Pesquisar");
-		pesquisarTrab.setBounds(250,70,100,35);
+		pesquisarTrab.setBounds(181,70,98,35);
 		add(pesquisarTrab);
 		
-		pesquisar = new JLabel("Pesquise logo abaixo o autor desejado:");
-		pesquisar.setBounds(75,100,280,70);
+		listarTrab = new JButton("Listar todos");
+		listarTrab.setBounds(280,70,103,35);
+		add(listarTrab);
+		
+		pesquisar = new JLabel("Pesquise logo abaixo o autor desejado ou liste todos:");
+		pesquisar.setBounds(40,100,370,70);
 		add(pesquisar);
 		
 		autor = new JTextField("Autor");
-		autor.setBounds(60,160,170,35);
+		autor.setBounds(10,160,170,35);
 		autor.setToolTipText("Pesquise o autor desejado");
 		add(autor);
 		
 		pesquisarAutor = new JButton("Pesquisar");
-		pesquisarAutor.setBounds(250,160,100,35);
+		pesquisarAutor.setBounds(181,160,98,35);
 		add(pesquisarAutor);
 		
-		pesquisar = new JLabel("Pesquise logo abaixo o genero desejado:");
-		pesquisar.setBounds(75,190,280,70);
+		listarAutor = new JButton("Listar todos");
+		listarAutor.setBounds(280,160,103,35);
+		add(listarAutor);
+		
+		pesquisar = new JLabel("Pesquise logo abaixo o genero desejado ou liste todos:");
+		pesquisar.setBounds(40,190,370,70);
 		add(pesquisar);
 		
 		genero = new JTextField("Genero");
-		genero.setBounds(60,250,170,35);
+		genero.setBounds(10,250,170,35);
 		genero.setToolTipText("Pesquise o genero desejado");
 		add(genero);
 		
 		pesquisarGenero = new JButton("Pesquisar");
-		pesquisarGenero.setBounds(250,250,100,35);
+		pesquisarGenero.setBounds(181,250,98,35);
 		add(pesquisarGenero);
+		
+		listarGenero = new JButton("Listar todos");
+		listarGenero.setBounds(280,250,103,35);
+		add(listarGenero);
 		
 		sairDaConta = new JButton("Sair da Conta");
 		sairDaConta.setBounds(25,320,130,35);
@@ -74,6 +88,9 @@ public class TelaUsuario extends JFrame{
 		ButtonHandler handler = new ButtonHandler();
 		sairDaConta.addActionListener(handler);
 		sairPrograma.addActionListener(handler);
+		listarTrab.addActionListener(handler);
+		listarAutor.addActionListener(handler);
+		listarGenero.addActionListener(handler);
 		pesquisarTrab.addActionListener(handler);
 		pesquisarAutor.addActionListener(handler);
 		pesquisarGenero.addActionListener(handler);
@@ -101,7 +118,12 @@ public class TelaUsuario extends JFrame{
 				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText());
 				telaTrab.desenhaNaTela();
 			}
-
+			
+			if(event.getSource() == listarTrab){
+				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText());
+				telaTrab.desenhaNaTelaTodos();
+			}
+			
 			// Pesquisar autores			
 			if(event.getSource() == pesquisarAutor){
 				System.out.println(autor.getText());

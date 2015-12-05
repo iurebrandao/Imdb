@@ -1,4 +1,6 @@
 package br.unb.cic.imdb.controle;
+import java.util.List;
+
 import br.unb.cic.imdb.integracao.jpa.DAOTrabalhoArtisticoJPA;
 import br.unb.cic.imdb.integracao.jpa.DAOUsuarioJPA;
 import br.unb.cic.imdb.negocio.TrabalhoArtistico;
@@ -30,6 +32,11 @@ public class Controle {
 	public TrabalhoArtistico recuperaTrabPorTitulo(String nome){
 		DAOTrabalhoArtisticoJPA trabJPA = new DAOTrabalhoArtisticoJPA();
 		return trabJPA.recuperaPorTitulo(nome);
+	}
+	
+	public List<TrabalhoArtistico> recuperaListaDeTrabs(){
+		DAOTrabalhoArtisticoJPA trabJPA = new DAOTrabalhoArtisticoJPA();
+		return trabJPA.recuperaTodos();
 	}
 	
 }

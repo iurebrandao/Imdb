@@ -145,6 +145,7 @@ public class TelaLogin extends JFrame {
 				System.out.println("senha = "+senha);
 				
 				JanelaOpcao(controle.realizarLogin(login,senha));
+				//JanelaOpcao(1);
 			}
 		}
 	}
