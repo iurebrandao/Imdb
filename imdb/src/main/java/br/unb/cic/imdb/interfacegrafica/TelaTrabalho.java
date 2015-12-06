@@ -3,6 +3,7 @@ package br.unb.cic.imdb.interfacegrafica;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ public class TelaTrabalho extends JFrame {
 	private List<TrabalhoArtistico> listaDeTrabalhos;
 	private Controle controle;
 	private JPanel panelEsquerdo, panelDireito, PanelPrincipal, panelFundo;
-	private JButton voltar, salvar;
+	private JButton voltar;
+	private ArrayList<JButton> avaliar;
 	private String nomeTrabalho;
 
 	public TelaTrabalho(Controle controle, String nomeTrabalho) {
@@ -57,7 +59,6 @@ public class TelaTrabalho extends JFrame {
 		if (trabalho != null) {
 			adicionarTrabalhoNoPanel(1);
 			voltar = new JButton("Voltar");
-			salvar = new JButton("Salvar");
 
 			panelEsquerdo.setLayout(new BoxLayout(panelEsquerdo, BoxLayout.PAGE_AXIS));
 			panelDireito.setLayout(new BoxLayout(panelDireito, BoxLayout.PAGE_AXIS));
@@ -112,29 +113,48 @@ public class TelaTrabalho extends JFrame {
 			JLabel informacaoTrab = new JLabel(informacoes);
 			JPanel panelesq = new JPanel();
 			panelesq.add(informacaoTrab);
-			
 			panelEsquerdo.add(panelesq);
 			
 			JButton avaliar = new JButton("avaliar");
-			JButton comentar = new JButton("comentar");
+			
 			avaliar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(null, "avaliar");
-				}
-			});
-			comentar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(null, "comentar");
+					TelaAvaliar telaAvaliar = new TelaAvaliar();
+					telaAvaliar.desenharTela();
 				}
 			});
 			JPanel paneldir = new JPanel();
 			paneldir.add( avaliar,BorderLayout.WEST);
-			paneldir.add(comentar, BorderLayout.EAST);
 			panelsDir.add(paneldir);
 		}
 		
 		else{
-			
+			int i = 0;
+			for(TrabalhoArtistico arrayTrab:listaDeTrabalhos){
+				
+				String informacoes = "<html>";
+				informacoes += arrayTrab.getTitulo() + "<br/>";
+				informacoes += arrayTrab.getAno() + "<br/>";
+				informacoes += arrayTrab.getGenero() + "<br/>";
+				informacoes += "</html>";
+				JLabel informacaoTrab = new JLabel(informacoes);
+				JPanel panelesq = new JPanel();
+				panelesq.add(informacaoTrab);
+				panelsEsq.add(i,panelesq);
+				
+				JButton avaliarButton = new JButton("Adicionar");
+				avaliar.add(i,avaliarButton);
+				(avaliar.get(i)).addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaAvaliar telaAvaliar = new TelaAvaliar();
+						telaAvaliar.desenharTela();
+					}
+				});
+				i++;
+			}
+			for (JPanel panel_aux : panelsEsq) {
+				panelEsquerdo.add(panel_aux);
+			}
 		}
 	}
 
@@ -143,10 +163,6 @@ public class TelaTrabalho extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == voltar) {
 				TelaTrabalho.this.dispose();
-			}
-			if (event.getSource() == salvar) {
-				JOptionPane.showMessageDialog(null, "O comentario e a avaliacao foram salvos", "Salvar",
-						JOptionPane.DEFAULT_OPTION);
 			}
 		}
 	}

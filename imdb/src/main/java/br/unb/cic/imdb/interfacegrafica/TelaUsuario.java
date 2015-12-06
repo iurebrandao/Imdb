@@ -127,11 +127,23 @@ public class TelaUsuario extends JFrame{
 			// Pesquisar autores			
 			if(event.getSource() == pesquisarAutor){
 				System.out.println(autor.getText());
+				TelaAutor telaTrab = new TelaAutor(controle,autor.getText());
+				telaTrab.desenhaNaTela();
 			}
-
+			if(event.getSource() == listarAutor){
+				TelaAutor telaAutor = new TelaAutor(controle,autor.getText());
+				telaAutor.desenhaNaTelaTodos();
+			}
+			
 			//Pesquisar generos			
 			if(event.getSource() == pesquisarGenero){
 				System.out.println(genero.getText());
+				TelaGenero telaGenero= new TelaGenero(controle,genero.getText());
+				telaGenero.desenhaNaTela();
+			}
+			if(event.getSource() == listarGenero){
+				TelaGenero telaGenero = new TelaGenero(controle,genero.getText());
+				telaGenero.desenhaNaTelaTodos();
 			}
 			
 			if (event.getSource() == sairDaConta) {
