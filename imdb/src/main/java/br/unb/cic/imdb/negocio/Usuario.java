@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="usuario_id")
 	private Long id;
 	@Column (nullable = false, unique = true)
 	private String login;
@@ -19,21 +20,11 @@ public class Usuario {
 	private String nome;
 	@Column
 	private Date dataNasc;
-	@ManyToMany
-	@JoinTable(name="tb_avaliacao", joinColumns = {@JoinColumn(name="usuario_id")},inverseJoinColumns = {@JoinColumn(name="trabalhoartistico_id")})
-	private List<TrabalhoArtistico> trabalhoArtistico;
-	
-	
-	public List<TrabalhoArtistico> getTrabalhoArtistico() {
-		return trabalhoArtistico;
-	}
+	@ManyToOne
+	private Avaliacao avaliacao;
 
-	public void setTrabalhoArtistico(List<TrabalhoArtistico> trabalhoArtistico) {
-		this.trabalhoArtistico = trabalhoArtistico;
-	}
-
-	public Usuario() {
-	}
+	
+	public Usuario() {}
 
 	public Usuario(String login, String senha, String nome, Date dataNasc) {
 		this.login = login;
@@ -72,7 +63,15 @@ public class Usuario {
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-	
-	
 
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+	
+	
+	
 }

@@ -12,9 +12,11 @@ import javax.transaction.Transactional;
 import br.unb.cic.imdb.integracao.DAOUsuario;
 import br.unb.cic.imdb.negocio.Usuario;
 
+
 public class DAOUsuarioJPA implements DAOUsuario {
 	
 	private EntityManager em;
+	
 	
    	@Override
    	@Transactional

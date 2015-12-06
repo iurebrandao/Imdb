@@ -1,35 +1,50 @@
 package br.unb.cic.imdb.integracao.jpa;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
+import javax.transaction.Transactional;
 
 import br.unb.cic.imdb.integracao.*;
-import br.unb.cic.imdb.negocio.Autor;
-import br.unb.cic.imdb.negocio.FaixaMusical;
+import br.unb.cic.imdb.negocio.AlbumMusical;
+import br.unb.cic.imdb.negocio.TrabalhoArtistico;
+
 
 public class DAOAlbumMusicalJPA implements DAOAlbumMusical{
-
+	
+	private DAOTrabalhoArtistico trabalhoArtisticoDAO;
 	private EntityManager em;
+	
 	@Override
-	public void salvar(FaixaMusical faixa) {
-		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		em.getTransaction().begin();
-		em.persist(faixa);
-		em.getTransaction().commit();
+	@Transactional
+	public void salvar(AlbumMusical album) {
+		try {
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			em.getTransaction().begin();
+			trabalhoArtisticoDAO.salvar(album);
+			em.getTransaction().commit();
+			
+		} catch (RollbackException e) {
+			System.err.println("Nao foi possivel inserir o album!");
+		}
 	}
 
 	@Override
-	public List<FaixaMusical> recuperaTodos() {
+	public List<AlbumMusical> recuperaTodos() {
 		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		return em.createQuery("FROM FaixaMusical").getResultList();
+		return em.createQuery("FROM AlbumMusical").getResultList();
 	}
 
 	@Override
-	public FaixaMusical recuperaPorNome(String titulo) {
+	public AlbumMusical recuperaPorNome(String nomeAlbum) {
 		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		List<FaixaMusical> faixas = em.createQuery("FROM FaixaMusical WHERE titulo = :tituloParam")
-				.setParameter("tituloParam", titulo).getResultList();
-		return faixas.size() == 1 ? faixas.get(0) : null;
+		List<AlbumMusical> album = em.createQuery("FROM AlbumMusical WHERE titulo = :tituloParam")
+				.setParameter("tituloParam", nomeAlbum).getResultList();
+		return album.size() == 1 ? album.get(0) : null;
+		
 	}
+
+	
 
 }

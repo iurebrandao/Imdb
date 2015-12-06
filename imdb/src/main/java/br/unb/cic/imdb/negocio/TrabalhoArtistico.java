@@ -1,18 +1,24 @@
 package br.unb.cic.imdb.negocio;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_TRABALHO_ARTISTICO")
-public class TrabalhoArtistico {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class TrabalhoArtistico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="trabalho_artistico_id")
 	private Long id;
 	@Column
 	private String titulo;
@@ -22,6 +28,16 @@ public class TrabalhoArtistico {
 	private Genero genero;
 	@ManyToOne
 	private Autor autor;
+	@ManyToOne
+	private Avaliacao avaliacao;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -54,5 +70,15 @@ public class TrabalhoArtistico {
 	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
+
+	public Avaliacao getAvaliacaoT() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+	
+	
 
 }
