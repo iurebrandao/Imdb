@@ -142,7 +142,7 @@ public class TelaTrabalho extends JFrame {
 				}
 			});
 			
-			JButton verAvaliacoes = new JButton("Avaliar");
+			JButton verAvaliacoes = new JButton("Ver avaliacoes");
 			
 			verAvaliacoes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
