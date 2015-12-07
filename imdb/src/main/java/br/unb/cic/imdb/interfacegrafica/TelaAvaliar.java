@@ -64,6 +64,7 @@ public class TelaAvaliar extends JFrame{
 		
 		enviar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Comentario e avaliacao enviados com sucesso!");
 				TelaAvaliar.this.dispose();
 			}
 		});

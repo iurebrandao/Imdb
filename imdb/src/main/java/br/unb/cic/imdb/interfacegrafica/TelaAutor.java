@@ -1,7 +1,11 @@
 package br.unb.cic.imdb.interfacegrafica;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,6 +25,8 @@ public class TelaAutor extends JFrame{
 	private ArrayList<JPanel> panelsEsq, panelsDir;
 	private Autor autor;
 	private List<Autor> listaDeAutores;
+	private Toolkit toolkit;
+	private Dimension screensize;
 	
 	public TelaAutor(Controle controle,String nomeAutor){
 		
@@ -30,9 +36,13 @@ public class TelaAutor extends JFrame{
 		panelEsquerdo = new JPanel();
 		panelDireito = new JPanel();
 		panelFundo = new JPanel();
+		panelsEsq = new ArrayList<>();
+		panelsDir = new ArrayList<>();
+		toolkit = Toolkit.getDefaultToolkit();
+		screensize = toolkit.getScreenSize();
 	}
 	
-	public void PanelPrincipal(int numTrabalhos) {
+	public void PanelPrincipal(int numAutores) {
 
 		this.setLayout(new BorderLayout());
 		this.setBounds(500, 150, 400, 410);
@@ -40,22 +50,26 @@ public class TelaAutor extends JFrame{
 
 		PanelPrincipal = new JPanel();
 		PanelPrincipal.setLayout(new BorderLayout());
+		String string = "                                                             ";
+		PanelPrincipal.add(new JLabel(string+"Lista de Autores:"), BorderLayout.NORTH);
 		PanelPrincipal.add(panelEsquerdo, BorderLayout.CENTER);
 		PanelPrincipal.add(panelDireito, BorderLayout.EAST);
 		PanelPrincipal.add(panelFundo, BorderLayout.SOUTH);
 
+		JScrollPane p = new JScrollPane(PanelPrincipal);
+		this.add(p, BorderLayout.CENTER);
 		this.setVisible(true);
-		this.add(PanelPrincipal);
-		if(numTrabalhos < 1)
+		if(numAutores < 1)
 			JOptionPane.showMessageDialog(null, "Sem autores para mostrar!","Sem trabalhos",JOptionPane.WARNING_MESSAGE);
-
+		else
+			ajustaTela(numAutores);
 	}
 
 	public void desenhaNaTela() {
 
 		autor = controle.recuperaAutorPorTitulo(nomeAutor);
 		if (autor != null) {
-			adicionarTrabalhoNoPanel(1);
+			adicionarAutorNoPanel(0);
 			voltar = new JButton("Voltar");
 
 			panelEsquerdo.setLayout(new BoxLayout(panelEsquerdo, BoxLayout.PAGE_AXIS));
@@ -82,7 +96,7 @@ public class TelaAutor extends JFrame{
 
 		listaDeAutores = controle.recuperaListaDeAutores();
 		if(listaDeAutores.size() > 0){
-			adicionarTrabalhoNoPanel(listaDeAutores.size());		
+			adicionarAutorNoPanel(listaDeAutores.size());		
 		}
 	
 		voltar = new JButton("Voltar");
@@ -101,7 +115,7 @@ public class TelaAutor extends JFrame{
 		
 	}
 
-	public void adicionarTrabalhoNoPanel(int numero) {
+	public void adicionarAutorNoPanel(int numero) {
 		if(numero < 1){
 			String informacoes = "<html>";
 			informacoes += autor.getNome() + "<br/>";
@@ -110,26 +124,48 @@ public class TelaAutor extends JFrame{
 			JLabel informacaoAutor = new JLabel(informacoes);
 			JPanel panelesq = new JPanel();
 			panelesq.add(informacaoAutor);
-			
+			panelesq.setBorder(BorderFactory.createLineBorder(Color.white));
+			panelesq.setBackground(SystemColor.activeCaption);
 			panelEsquerdo.add(panelesq);
-			
-			JButton avaliar = new JButton("avaliar");
-			
-			avaliar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(null, "avaliar");
-				}
-			});
-			JPanel paneldir = new JPanel();
-			paneldir.add( avaliar,BorderLayout.WEST);
-			panelsDir.add(paneldir);
 		}
 		
 		else{
-			
+			int i = 0;
+			for(Autor arrayAutores:listaDeAutores){
+				
+				String informacoes = "<html>";
+				
+				informacoes += arrayAutores.getNome() + "<br/>";
+				informacoes += arrayAutores.getDescricao() + "<br/>";
+				informacoes += "</html>";
+				JLabel informacaoAutores = new JLabel(informacoes);
+				JPanel panelesq = new JPanel();
+				panelesq.add(informacaoAutores);
+				panelesq.setBorder(BorderFactory.createLineBorder(Color.white));
+				panelesq.setBackground(SystemColor.activeCaption);
+				panelsEsq.add(i,panelesq);
+				
+				i++;
+			}
+			for (JPanel panel_aux : panelsEsq) {
+				panelEsquerdo.add(panel_aux);
+			}
 		}
 	}
-
+	public void ajustaTela(int num_usuarios){
+		if (num_usuarios <= 7) {
+			if(num_usuarios <=2)
+				this.setBounds(screensize.width / 3, screensize.height / 6, 500, 200);	
+			else
+				this.setBounds(screensize.width / 3, screensize.height / 6, 500, 200 + (num_usuarios * 50));
+			this.repaint();
+		}
+		else{
+			this.setBounds(screensize.width / 3, screensize.height / 30, 500, 700);
+			this.repaint();
+		}
+	}
+	
 	private class ButtonHandler implements ActionListener {
 		// Metodo que trata evento de botao
 		public void actionPerformed(ActionEvent event) {
