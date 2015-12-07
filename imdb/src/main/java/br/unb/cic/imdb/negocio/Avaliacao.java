@@ -17,10 +17,10 @@ public class Avaliacao {
 	private Integer avalicao;
 	@Column
 	private String comentario;
-	@OneToMany(mappedBy = "avaliacao")
-	private List<Usuario> usuario;
-	@OneToMany(mappedBy = "avaliacao")
-	private List<TrabalhoArtistico> trabalho;
+	@ManyToOne
+	private Usuario usuario;
+	@ManyToOne
+	private TrabalhoArtistico trabalhoArtistico;
 	
 	public Avaliacao(){}
 
@@ -48,20 +48,19 @@ public class Avaliacao {
 		this.comentario = comentario;
 	}
 
-	public List<Usuario> getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public List<TrabalhoArtistico> getTrabalho() {
-		return trabalho;
+	public TrabalhoArtistico getTrabalhoArtistico() {
+		return trabalhoArtistico;
 	}
 
-	public void setTrabalho(List<TrabalhoArtistico> trabalho) {
-		this.trabalho = trabalho;
+	public void setTrabalhoArtistico(TrabalhoArtistico trabalhoArtistico) {
+		this.trabalhoArtistico = trabalhoArtistico;
 	}
-
 }

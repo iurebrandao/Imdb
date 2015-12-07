@@ -18,6 +18,8 @@ public class FaixaMusical{
 	@ManyToOne
 	private AlbumMusical album_musical;
 
+	public FaixaMusical(){
+	}
 
 	public FaixaMusical(Long id, String titulo, Integer duracao) {
 		this.id = id;

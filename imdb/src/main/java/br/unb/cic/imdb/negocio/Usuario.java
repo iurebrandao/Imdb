@@ -20,8 +20,8 @@ public class Usuario {
 	private String nome;
 	@Column
 	private Date dataNasc;
-	@ManyToOne
-	private Avaliacao avaliacao;
+	@OneToMany(mappedBy = "usuario")
+	private List<Avaliacao> avaliacoes;
 
 	
 	public Usuario() {}
@@ -64,14 +64,12 @@ public class Usuario {
 		this.dataNasc = dataNasc;
 	}
 
-	public Avaliacao getAvaliacao() {
-		return avaliacao;
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
 	}
 
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
-	
-	
 	
 }

@@ -13,7 +13,6 @@ import br.unb.cic.imdb.negocio.TrabalhoArtistico;
 
 public class DAOFilmeJPA implements DAOFilme {
 	
-	private DAOTrabalhoArtistico trabalhoArtisticoDAO;
 	private EntityManager em;
 
 	@Override
@@ -22,7 +21,7 @@ public class DAOFilmeJPA implements DAOFilme {
 		try {
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
 			em.getTransaction().begin();
-			trabalhoArtisticoDAO.salvar(filme);
+			em.persist(filme);
 			em.getTransaction().commit();
 			
 		} catch (RollbackException e) {

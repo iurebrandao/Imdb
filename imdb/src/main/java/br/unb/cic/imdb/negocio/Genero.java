@@ -23,6 +23,9 @@ public class Genero {
 	private String descricao;
 	@OneToMany(mappedBy =  "genero")
 	private List<TrabalhoArtistico> trabalhoArtistico;
+	
+	public Genero(){
+	}
 
 	public Genero(String titulo, String descricao) {
 		this.titulo = titulo;

@@ -1,6 +1,8 @@
 package br.unb.cic.imdb.negocio;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_TRABALHO_ARTISTICO")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class TrabalhoArtistico {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class TrabalhoArtistico {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name="trabalho_artistico_id")
 	private Long id;
 	@Column
@@ -28,8 +30,8 @@ public abstract class TrabalhoArtistico {
 	private Genero genero;
 	@ManyToOne
 	private Autor autor;
-	@ManyToOne
-	private Avaliacao avaliacao;
+	@OneToMany(mappedBy = "trabalhoArtistico")
+	private List<Avaliacao> avaliacoes;
 	
 	public Long getId() {
 		return id;
@@ -71,14 +73,12 @@ public abstract class TrabalhoArtistico {
 		this.autor = autor;
 	}
 
-	public Avaliacao getAvaliacaoT() {
-		return avaliacao;
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
 	}
 
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
-	
-	
 
 }
