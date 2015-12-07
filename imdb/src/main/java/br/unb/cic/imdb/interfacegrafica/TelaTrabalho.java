@@ -42,6 +42,7 @@ public class TelaTrabalho extends JFrame {
 		screensize = toolkit.getScreenSize();
 		generos = new ArrayList<>();
 	}
+	
 
 	public void PanelPrincipal(int numTrabalhos) {
 
@@ -137,7 +138,7 @@ public class TelaTrabalho extends JFrame {
 			
 			avaliar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario);
+					TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario, trabalho);
 					telaAvaliar.desenharTela();
 				}
 			});
@@ -178,7 +179,7 @@ public class TelaTrabalho extends JFrame {
 				avaliar.add(i,avaliarButton);
 				(avaliar.get(i)).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario);
+						TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario, trabalho);
 						telaAvaliar.desenharTela();
 					}
 				});

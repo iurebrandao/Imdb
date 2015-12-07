@@ -17,6 +17,7 @@ public class TelaUsuario extends JFrame{
 	private JButton pesquisarTrab,pesquisarAutor,pesquisarGenero,sairDaConta,sairPrograma;
 	private JButton listarTrab,listarAutor,listarGenero;
 	private Usuario usuario;
+	
 	public TelaUsuario(Controle controle,Usuario usuario){
 		super("Tela usuario");
 		this.controle = controle;

@@ -69,4 +69,8 @@ public class Controle {
 		DAOAvaliacaoJPA avaliacaoJPA = new DAOAvaliacaoJPA();
 		return avaliacaoJPA.salvar(avaliacao);	
 	}
+	
+	public Long recuperarIdUsuario(String login){
+		return bancoDeDadosUsuario.recuperarId(login);
+	}
 }

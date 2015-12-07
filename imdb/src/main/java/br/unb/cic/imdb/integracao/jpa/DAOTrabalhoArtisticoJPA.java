@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
+
 import br.unb.cic.imdb.integracao.DAOTrabalhoArtistico;
 import br.unb.cic.imdb.negocio.Autor;
 import br.unb.cic.imdb.negocio.Genero;
@@ -16,10 +18,16 @@ public class DAOTrabalhoArtisticoJPA implements DAOTrabalhoArtistico{
 	
 	@Override
 	public void salvar(TrabalhoArtistico trabalhoArtistico) {
-		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		em.getTransaction().begin();
-		em.persist(trabalhoArtistico);
-		em.getTransaction().commit();
+		try {
+			
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			em.getTransaction().begin();
+			em.persist(trabalhoArtistico);
+			em.getTransaction().commit();
+			
+		} catch (RollbackException e) {
+			System.out.println("Nao foi possivel adicionar nenhum trabalho!!");
+		}
 	}
 
 	@Override

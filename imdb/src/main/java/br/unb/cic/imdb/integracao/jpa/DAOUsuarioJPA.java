@@ -54,12 +54,27 @@ public class DAOUsuarioJPA implements DAOUsuario {
 
 	@Override
 	public Usuario recuperarPorNome(String login) {
-		
 		try {
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
 			Query q = em.createQuery("select u from Usuario u where u.login = :login", Usuario.class);
 			q.setParameter("login", login);
 			return (Usuario) q.getSingleResult();
+			
+		} catch (IllegalArgumentException | NoResultException e) {
+			return null;
+		}
+	}
+	
+	public Long recuperarId(String login){
+		Usuario auxUsuario;
+		Long auxId;
+		try {
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			Query q = em.createQuery("select u from Usuario u where u.login = :login", Usuario.class);
+			q.setParameter("login", login);
+			auxUsuario = (Usuario) q.getSingleResult();
+			auxId = auxUsuario.getId();
+			return auxId;
 			
 		} catch (IllegalArgumentException | NoResultException e) {
 			return null;

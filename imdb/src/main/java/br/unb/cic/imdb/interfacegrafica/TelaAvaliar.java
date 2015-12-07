@@ -3,11 +3,14 @@ package br.unb.cic.imdb.interfacegrafica;
 import javax.swing.JFrame;
 
 import br.unb.cic.imdb.controle.Controle;
+import br.unb.cic.imdb.integracao.jpa.DAOUsuarioJPA;
 import br.unb.cic.imdb.negocio.Avaliacao;
+import br.unb.cic.imdb.negocio.TrabalhoArtistico;
 import br.unb.cic.imdb.negocio.Usuario;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class TelaAvaliar extends JFrame{
@@ -18,16 +21,19 @@ public class TelaAvaliar extends JFrame{
 	private Controle controle;
 	private Avaliacao avaliacao;
 	private Usuario usuario;
+	private TrabalhoArtistico trabalho;
 	
-	public TelaAvaliar(Controle controle,Usuario usuario){
+	
+	public TelaAvaliar(Controle controle,Usuario usuario, TrabalhoArtistico trabalho){
 		
 		super("Avaliacao");
 		this.usuario = usuario;
 		this.controle = controle;
+		this.trabalho = trabalho;
 		this.setBounds(500,200, 350, 370);
 		avaliacao = new Avaliacao();
 	}
-	
+		
 	public void desenharTela(){
 		
 		this.setLayout(null);
@@ -77,6 +83,7 @@ public class TelaAvaliar extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				avaliacao.setAvalicao(avaliar);
 				avaliacao.setComentario(comentario.getText());
+				avaliacao.setTrabalhoArtistico(trabalho);
 				avaliacao.setUsuario(usuario);
 				if(controle.salvarAvaliacao(avaliacao))
 					JOptionPane.showMessageDialog(null, "Comentario e avaliacao enviados com sucesso!");

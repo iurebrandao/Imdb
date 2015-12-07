@@ -15,7 +15,8 @@ public class TelaLogin extends JFrame {
 	private JPasswordField Senha;
 	private JButton fazerLogin,voltar;
 	private Controle controle;
-	private String login,senha;
+	private String login;
+	private String senha;
 	private Usuario usuario;
 	
 	public TelaLogin(Controle controle) {
@@ -168,7 +169,7 @@ public class TelaLogin extends JFrame {
 		// Abre a janela de usuario e fecha a do Login
 		case 1:
 			TelaLogin.this.dispose();
-//			usuario = controle.recuperarUsuarioPorLogin(login);
+			usuario = controle.recuperarUsuarioPorLogin(login);
 			new TelaUsuario(controle,usuario);
 			break;
 			
