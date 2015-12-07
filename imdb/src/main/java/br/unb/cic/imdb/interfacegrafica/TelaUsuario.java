@@ -1,6 +1,7 @@
 package br.unb.cic.imdb.interfacegrafica;
 
 import br.unb.cic.imdb.controle.Controle;
+import br.unb.cic.imdb.negocio.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +16,11 @@ public class TelaUsuario extends JFrame{
 	private JLabel pesquisar;
 	private JButton pesquisarTrab,pesquisarAutor,pesquisarGenero,sairDaConta,sairPrograma;
 	private JButton listarTrab,listarAutor,listarGenero;
-	
-	public TelaUsuario(Controle controle){
+	private Usuario usuario;
+	public TelaUsuario(Controle controle,Usuario usuario){
 		super("Tela usuario");
 		this.controle = controle;
+		this.usuario = usuario;
 		this.setLayout(null);
 		this.setBounds(500, 150, 400, 410);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -115,12 +117,12 @@ public class TelaUsuario extends JFrame{
 			// Pesquisar trabalhos artisticos			
 			if(event.getSource() == pesquisarTrab){
 				System.out.println(trabalhoArtistico.getText());
-				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText());
+				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText(),usuario);
 				telaTrab.desenhaNaTela();
 			}
 			
 			if(event.getSource() == listarTrab){
-				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText());
+				TelaTrabalho telaTrab = new TelaTrabalho(controle,trabalhoArtistico.getText(),usuario);
 				telaTrab.desenhaNaTelaTodos();
 			}
 			

@@ -1,6 +1,11 @@
 package br.unb.cic.imdb.interfacegrafica;
 
 import javax.swing.JFrame;
+
+import br.unb.cic.imdb.controle.Controle;
+import br.unb.cic.imdb.negocio.Avaliacao;
+import br.unb.cic.imdb.negocio.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,11 +14,18 @@ public class TelaAvaliar extends JFrame{
 	
 	private JTextArea comentario;
 	private JButton aval1,aval2,aval3,aval4,aval5,enviar;
-	private int avaliacao=0;
+	private int avaliar=1;
+	private Controle controle;
+	private Avaliacao avaliacao;
+	private Usuario usuario;
 	
-	public TelaAvaliar(){
+	public TelaAvaliar(Controle controle,Usuario usuario){
+		
 		super("Avaliacao");
+		this.usuario = usuario;
+		this.controle = controle;
 		this.setBounds(500,200, 350, 370);
+		avaliacao = new Avaliacao();
 	}
 	
 	public void desenharTela(){
@@ -64,19 +76,20 @@ public class TelaAvaliar extends JFrame{
 		
 		enviar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Comentario e avaliacao enviados com sucesso!");
+				System.out.println(avaliar+" | "+comentario.getText());
+				avaliacao.setAvalicao(avaliar);
+				avaliacao.setComentario(comentario.getText());
+				avaliacao.setUsuario(usuario);
+				if(controle.salvarAvaliacao(avaliacao))
+					JOptionPane.showMessageDialog(null, "Comentario e avaliacao enviados com sucesso!");
+				else
+					JOptionPane.showMessageDialog(null, "Erro ao enviar comentario e avaliacao!","Erro",JOptionPane.ERROR_MESSAGE);
 				TelaAvaliar.this.dispose();
 			}
 		});
 		this.setVisible(true);
 	}
 	
-	public String getComentario(){
-		return comentario.getText();
-	}
-	public int getavaliacao(){
-		return avaliacao;
-	}
 	public class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			aval1.setBackground(SystemColor.white);
@@ -85,23 +98,23 @@ public class TelaAvaliar extends JFrame{
 			aval4.setBackground(SystemColor.white);
 			aval5.setBackground(SystemColor.white);
 			if (event.getSource() == aval1) {
-				avaliacao=1;
+				avaliar=1;
 				aval1.setBackground(SystemColor.green);
 			}
 			if (event.getSource() == aval2) {
-				avaliacao=2;
+				avaliar=2;
 				aval2.setBackground(SystemColor.green);
 			}
 			if (event.getSource() == aval3) {
-				avaliacao=3;
+				avaliar=3;
 				aval3.setBackground(SystemColor.green);
 			}
 			if (event.getSource() == aval4) {
-				avaliacao=4;
+				avaliar = 4;
 				aval4.setBackground(SystemColor.green);
 			}
 			if (event.getSource() == aval5) {
-				avaliacao=5;
+				avaliar=5;
 				aval5.setBackground(SystemColor.green);
 			}
 		}

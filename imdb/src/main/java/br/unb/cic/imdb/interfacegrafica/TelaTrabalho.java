@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import br.unb.cic.imdb.controle.Controle;
 import br.unb.cic.imdb.negocio.TrabalhoArtistico;
+import br.unb.cic.imdb.negocio.Usuario;
 
 public class TelaTrabalho extends JFrame {
 
@@ -28,9 +29,11 @@ public class TelaTrabalho extends JFrame {
 	private String nomeTrabalho;
 	private Toolkit toolkit;
 	private Dimension screensize;
+	private Usuario usuario;
 
-	public TelaTrabalho(Controle controle, String nomeTrabalho) {
+	public TelaTrabalho(Controle controle, String nomeTrabalho,Usuario usuario) {
 		super("Trabalhos Artisticos");
+		this.usuario = usuario;
 		this.controle = controle;
 		this.nomeTrabalho = nomeTrabalho;
 		panelEsquerdo = new JPanel();
@@ -134,7 +137,7 @@ public class TelaTrabalho extends JFrame {
 			
 			avaliar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					TelaAvaliar telaAvaliar = new TelaAvaliar();
+					TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario);
 					telaAvaliar.desenharTela();
 				}
 			});
@@ -164,7 +167,7 @@ public class TelaTrabalho extends JFrame {
 				avaliar.add(i,avaliarButton);
 				(avaliar.get(i)).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TelaAvaliar telaAvaliar = new TelaAvaliar();
+						TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario);
 						telaAvaliar.desenharTela();
 					}
 				});

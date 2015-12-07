@@ -2,10 +2,12 @@ package br.unb.cic.imdb.controle;
 import java.util.List;
 
 import br.unb.cic.imdb.integracao.jpa.DAOAutorJPA;
+import br.unb.cic.imdb.integracao.jpa.DAOAvaliacaoJPA;
 import br.unb.cic.imdb.integracao.jpa.DAOGeneroJPA;
 import br.unb.cic.imdb.integracao.jpa.DAOTrabalhoArtisticoJPA;
 import br.unb.cic.imdb.integracao.jpa.DAOUsuarioJPA;
 import br.unb.cic.imdb.negocio.Autor;
+import br.unb.cic.imdb.negocio.Avaliacao;
 import br.unb.cic.imdb.negocio.Genero;
 import br.unb.cic.imdb.negocio.TrabalhoArtistico;
 import br.unb.cic.imdb.negocio.Usuario;
@@ -33,6 +35,10 @@ public class Controle {
 		return sucesso;
 	}
 	
+	public Usuario recuperarUsuarioPorLogin(String login){
+		return bancoDeDadosUsuario.recuperarPorNome(login);
+	}
+	
 	public TrabalhoArtistico recuperaTrabPorTitulo(String nome){
 		DAOTrabalhoArtisticoJPA trabJPA = new DAOTrabalhoArtisticoJPA();
 		return trabJPA.recuperaPorTitulo(nome);
@@ -57,5 +63,10 @@ public class Controle {
 	public Genero recuperaGeneroPorTitulo(String nomeGenero){
 		DAOGeneroJPA generoJPA = new DAOGeneroJPA();
 		return generoJPA.recuperaPorTitulo(nomeGenero);
+	}
+	
+	public boolean salvarAvaliacao(Avaliacao avaliacao){
+		DAOAvaliacaoJPA avaliacaoJPA = new DAOAvaliacaoJPA();
+		return avaliacaoJPA.salvar(avaliacao);	
 	}
 }

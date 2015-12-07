@@ -6,7 +6,7 @@ import br.unb.cic.imdb.negocio.Usuario;
 
 public interface DAOAvaliacao {
 
-	public void salvar(Avaliacao avaliacao);
+	public boolean salvar(Avaliacao avaliacao);
 	public Avaliacao recuperarPorUsuario(Usuario usuario);
 	public Avaliacao recuperarPorTrabalhoArtistico(TrabalhoArtistico trabalho);
 	

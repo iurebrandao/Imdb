@@ -1,6 +1,8 @@
 package br.unb.cic.imdb.interfacegrafica;
 
 import br.unb.cic.imdb.controle.*;
+import br.unb.cic.imdb.negocio.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Collections;
@@ -14,6 +16,7 @@ public class TelaLogin extends JFrame {
 	private JButton fazerLogin,voltar;
 	private Controle controle;
 	private String login,senha;
+	private Usuario usuario;
 	
 	public TelaLogin(Controle controle) {
 
@@ -24,6 +27,7 @@ public class TelaLogin extends JFrame {
 		this.setBounds(500, 200,320,230); // Posicionar o layout no lugar desejado da tela
 		this.controle = controle;
 		
+		usuario = new Usuario();
 		campoLogin = new JLabel("Login: ");
 		campoLogin.setBounds(20, 1, 70, 70);
 
@@ -145,7 +149,6 @@ public class TelaLogin extends JFrame {
 				System.out.println("senha = "+senha);
 				
 				JanelaOpcao(controle.realizarLogin(login,senha));
-				//JanelaOpcao(1);
 			}
 		}
 	}
@@ -165,7 +168,8 @@ public class TelaLogin extends JFrame {
 		// Abre a janela de usuario e fecha a do Login
 		case 1:
 			TelaLogin.this.dispose();
-			new TelaUsuario(controle);
+			usuario = controle.recuperarUsuarioPorLogin(login);
+			new TelaUsuario(controle,usuario);
 			break;
 			
 		default:

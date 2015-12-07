@@ -3,6 +3,7 @@ package br.unb.cic.imdb.integracao.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 
 import br.unb.cic.imdb.integracao.DAOAvaliacao;
 import br.unb.cic.imdb.negocio.Avaliacao;
@@ -14,11 +15,18 @@ public class DAOAvaliacaoJPA implements DAOAvaliacao {
 	private EntityManager em;
 	
 	@Override
-	public void salvar(Avaliacao avaliacao) {
-		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		em.getTransaction().begin();
-		em.persist(avaliacao);
-		em.getTransaction().commit();
+	public boolean salvar(Avaliacao avaliacao) {
+		try {
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			em.getTransaction().begin();
+			em.persist(avaliacao);
+			em.getTransaction().commit();
+			return true;
+		}catch(RollbackException e) {
+			System.err.println("Falha ao enviar a avaliacao!");
+			return false;
+		}
+		
 	}
 
 	@Override
