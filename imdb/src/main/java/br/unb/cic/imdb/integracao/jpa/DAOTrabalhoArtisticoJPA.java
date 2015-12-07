@@ -53,8 +53,8 @@ public class DAOTrabalhoArtisticoJPA implements DAOTrabalhoArtistico{
 		try {
 
 			em = EMFactoryHelper.instance().getFactory().createEntityManager();
-			Query q = em.createQuery("select u FROM tb_trabalho_artistico u  WHERE u.titulo = :tituloParam",TrabalhoArtistico.class);
-			q.setParameter("titulo", nomeTitulo);
+			Query q = em.createQuery("select u FROM TrabalhoArtistico u  WHERE u.titulo = :tituloParam",TrabalhoArtistico.class);
+			q.setParameter("tituloParam", nomeTitulo);
 			return (TrabalhoArtistico) q.getSingleResult();
 
 		} catch (IllegalArgumentException | NoResultException e) {

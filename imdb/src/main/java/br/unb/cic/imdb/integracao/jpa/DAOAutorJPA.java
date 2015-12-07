@@ -3,10 +3,13 @@ package br.unb.cic.imdb.integracao.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import br.unb.cic.imdb.integracao.DAOAutor;
 import br.unb.cic.imdb.negocio.Autor;
 import br.unb.cic.imdb.negocio.Genero;
+import br.unb.cic.imdb.negocio.TrabalhoArtistico;
 
 public class DAOAutorJPA implements DAOAutor{
 
@@ -22,16 +25,28 @@ public class DAOAutorJPA implements DAOAutor{
 	
 	@Override
 	public List<Autor> recuperaTodos(){
-		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		return em.createQuery("FROM Autor").getResultList();
+		try {
+			
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			return em.createQuery("FROM Autor").getResultList();
+			
+		} catch (IllegalArgumentException | NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override
 	public Autor recuperaPorNome(String nomeAutor) {
-		em = EMFactoryHelper.instance().getFactory().createEntityManager();
-		List<Autor> autores = em.createQuery("FROM Autor WHERE nome = :nomeParam")
-				.setParameter("nomeParam", nomeAutor).getResultList();
-		return autores.size() == 1 ? autores.get(0) : null;
+		try {
+
+			em = EMFactoryHelper.instance().getFactory().createEntityManager();
+			Query q = em.createQuery("select u FROM Autor u  WHERE u.nome = :nomeParam",Autor.class);
+			q.setParameter("nomeParam", nomeAutor);
+			return (Autor) q.getSingleResult();
+
+		} catch (IllegalArgumentException | NoResultException e) {
+			return null;
+		}
 	}
 	
 }
