@@ -15,7 +15,9 @@ import javax.swing.*;
 
 import br.unb.cic.imdb.controle.Controle;
 import br.unb.cic.imdb.negocio.Autor;
+import br.unb.cic.imdb.negocio.Filme;
 import br.unb.cic.imdb.negocio.Genero;
+import br.unb.cic.imdb.negocio.TrabalhoArtistico;
 
 public class TelaGenero extends JFrame {
 	
@@ -26,6 +28,8 @@ public class TelaGenero extends JFrame {
 	private Controle controle;
 	private Genero genero;
 	private List<Genero> listaDeGeneros;
+	private List<TrabalhoArtistico> listaDeTrabalhos;
+	private List<Filme> listaDeFilmes;
 	private Toolkit toolkit;
 	private Dimension screensize;
 	
@@ -135,9 +139,19 @@ public class TelaGenero extends JFrame {
 			for(Genero arrayGeneros:listaDeGeneros){
 				
 				String informacoes = "<html>";
+				listaDeTrabalhos = arrayGeneros.getTrabalhoArtistico();
+				listaDeFilmes = arrayGeneros.getFilme();
 				
 				informacoes += arrayGeneros.getTitulo() + "<br/>";
 				informacoes += arrayGeneros.getDescricao() + "<br/>";
+				
+				for(TrabalhoArtistico arrayTrab:listaDeTrabalhos){
+					informacoes += arrayTrab.getTitulo()+ "<br/>";
+				}
+				for(Filme arrayFilme:listaDeFilmes){
+					informacoes += arrayFilme.getTitulo()+ "<br/>";
+				}
+				
 				informacoes += arrayGeneros.getTrabalhoArtistico() + "<br/>";
 				informacoes += "</html>";
 				JLabel informacaoAutores = new JLabel(informacoes);
