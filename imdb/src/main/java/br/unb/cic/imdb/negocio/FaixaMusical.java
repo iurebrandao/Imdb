@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class FaixaMusical{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="faixa_musica_id")
 	private Long id;
 	@Column
 	private String titulo;

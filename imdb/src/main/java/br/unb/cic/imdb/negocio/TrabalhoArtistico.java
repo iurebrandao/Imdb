@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +21,6 @@ import javax.persistence.Table;
 public class TrabalhoArtistico {
 	@Id
 	@GeneratedValue
-	@Column(name="trabalho_artistico_id")
 	private Long id;
 	@Column
 	private String titulo;

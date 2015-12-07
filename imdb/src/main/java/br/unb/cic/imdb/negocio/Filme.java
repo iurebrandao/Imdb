@@ -7,8 +7,8 @@ import javax.persistence.*;
 @AttributeOverrides({ 
 	@AttributeOverride(name = "titulo", column = @Column),
 	@AttributeOverride(name = "ano", column = @Column ),
-	@AttributeOverride(name = "autor", column = @Column(name = "autor_id")),
-	@AttributeOverride(name = "genero", column = @Column(name = "genero_id"))
+	@AttributeOverride(name = "genero", column = @Column(name = "genero_id")),
+	@AttributeOverride(name = "autor", column = @Column(name = "autor_id"))
 })
 public class Filme extends TrabalhoArtistico{
 	@Column

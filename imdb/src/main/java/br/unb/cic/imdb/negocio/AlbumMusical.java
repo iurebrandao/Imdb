@@ -9,8 +9,8 @@ import javax.persistence.*;
 @AttributeOverrides({ 
 	@AttributeOverride(name = "titulo", column = @Column),
 	@AttributeOverride(name = "ano", column = @Column ),
-	@AttributeOverride(name = "autor", column = @Column(name = "autor_autor_id")),
-	@AttributeOverride(name = "genero", column = @Column(name = "genero_genero_id"))
+	@AttributeOverride(name = "autor", column = @Column(name = "autor_id")),
+	@AttributeOverride(name = "genero", column = @Column(name = "genero_id"))
 })
 public class AlbumMusical extends TrabalhoArtistico{
 	@OneToMany(mappedBy = "album_musical")

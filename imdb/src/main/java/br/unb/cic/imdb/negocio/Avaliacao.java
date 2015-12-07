@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class Avaliacao {
 	@Id
 	@GeneratedValue
-	@Column(name="avaliacao_id")
 	private Long id;
 	@Column
 	private Integer avalicao;
