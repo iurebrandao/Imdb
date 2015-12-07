@@ -134,6 +134,7 @@ public class TelaTrabalho extends JFrame {
 			panelesq.setBackground(SystemColor.activeCaption);
 			panelEsquerdo.add(panelesq);
 			
+
 			JButton avaliar = new JButton("Avaliar");
 			
 			avaliar.addActionListener(new ActionListener() {
@@ -174,15 +175,17 @@ public class TelaTrabalho extends JFrame {
 				panelesq.setBorder(BorderFactory.createLineBorder(Color.white));
 				panelesq.setBackground(SystemColor.activeCaption);
 				panelsEsq.add(i,panelesq);
-				
-				JButton avaliarButton = new JButton("Avaliar");
-				avaliar.add(i,avaliarButton);
-				(avaliar.get(i)).addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario, trabalho);
-						telaAvaliar.desenharTela();
-					}
-				});
+	
+//   Tirei aqui a parada de avaliar da lista de trabalhos				
+
+//				JButton avaliarButton = new JButton("Avaliar");
+//				avaliar.add(i,avaliarButton);
+//				(avaliar.get(i)).addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent e) {
+//						TelaAvaliar telaAvaliar = new TelaAvaliar(controle,usuario, trabalho);
+//						telaAvaliar.desenharTela();
+//					}
+//				});
 				
 				JButton avaliacoesButton = new JButton("Ver avaliacoes");
 				verAvaliacoes.add(i,avaliacoesButton);
@@ -195,7 +198,7 @@ public class TelaTrabalho extends JFrame {
 				
 				JPanel paneldir = new JPanel();
 				paneldir.setLayout(new BorderLayout());
-				paneldir.add(avaliar.get(i), BorderLayout.WEST);
+//              paneldir.add(avaliar.get(i), BorderLayout.WEST);
 				paneldir.add(verAvaliacoes.get(i), BorderLayout.EAST);
 				panelsDir.add(i,paneldir);
 				i++;
