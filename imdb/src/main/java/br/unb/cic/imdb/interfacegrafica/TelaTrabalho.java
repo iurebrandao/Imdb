@@ -1,11 +1,6 @@
 package br.unb.cic.imdb.interfacegrafica;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,18 +9,18 @@ import java.util.List;
 import javax.swing.*;
 
 import br.unb.cic.imdb.controle.Controle;
-import br.unb.cic.imdb.negocio.TrabalhoArtistico;
-import br.unb.cic.imdb.negocio.Usuario;
+import br.unb.cic.imdb.negocio.*;
 
 public class TelaTrabalho extends JFrame {
 
 	private ArrayList<JPanel> panelsEsq, panelsDir;
 	private TrabalhoArtistico trabalho;
 	private List<TrabalhoArtistico> listaDeTrabalhos;
+	private List<Genero> generos;
 	private Controle controle;
 	private JPanel panelEsquerdo, panelDireito, PanelPrincipal, panelFundo;
 	private JButton voltar;
-	private ArrayList<JButton> avaliar;
+	private ArrayList<JButton> avaliar,verAvaliacoes;
 	private String nomeTrabalho;
 	private Toolkit toolkit;
 	private Dimension screensize;
@@ -42,8 +37,10 @@ public class TelaTrabalho extends JFrame {
 		panelsEsq = new ArrayList<>();
 		panelsDir = new ArrayList<>();
 		avaliar = new ArrayList<>();
+		verAvaliacoes = new ArrayList<>();
 		toolkit = Toolkit.getDefaultToolkit();
 		screensize = toolkit.getScreenSize();
+		generos = new ArrayList<>();
 	}
 
 	public void PanelPrincipal(int numTrabalhos) {
@@ -121,10 +118,13 @@ public class TelaTrabalho extends JFrame {
 
 	public void adicionarTrabalhoNoPanel(int numero) {
 		if(numero < 1){
+			
+			generos.add(0, trabalho.getGenero());
+			
 			String informacoes = "<html>";
-			informacoes += trabalho.getTitulo() + "<br/>";
-			informacoes += trabalho.getAno() + "<br/>";
-			informacoes += trabalho.getGenero() + "<br/>";
+			informacoes += "Titulo: "+trabalho.getTitulo() + "<br/>";
+			informacoes += "Ano: "+trabalho.getAno() + "<br/>";
+			informacoes += "Genero: "+generos.get(0).getTitulo() + "<br/>";
 			informacoes += "</html>";
 			JLabel informacaoTrab = new JLabel(informacoes);
 			JPanel panelesq = new JPanel();
@@ -133,7 +133,7 @@ public class TelaTrabalho extends JFrame {
 			panelesq.setBackground(SystemColor.activeCaption);
 			panelEsquerdo.add(panelesq);
 			
-			JButton avaliar = new JButton("avaliar");
+			JButton avaliar = new JButton("Avaliar");
 			
 			avaliar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -141,20 +141,31 @@ public class TelaTrabalho extends JFrame {
 					telaAvaliar.desenharTela();
 				}
 			});
+			
+			JButton verAvaliacoes = new JButton("Avaliar");
+			
+			verAvaliacoes.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					TelaVerAvaliacoes telaAvaliacoes = new TelaVerAvaliacoes(trabalho);
+					telaAvaliacoes.desenhaNaTelaTodos();
+				}
+			});
+			
 			JPanel paneldir = new JPanel();
-			paneldir.add( avaliar,BorderLayout.WEST);
 			paneldir.setLayout(new BorderLayout());
+			paneldir.add( avaliar,BorderLayout.WEST);
+			paneldir.add( verAvaliacoes,BorderLayout.EAST);
 			panelDireito.add(paneldir);
 		}
 		
 		else{
 			int i = 0;
 			for(TrabalhoArtistico arrayTrab:listaDeTrabalhos){
-				
+				generos.add(i,arrayTrab.getGenero());
 				String informacoes = "<html>";
-				informacoes += arrayTrab.getTitulo() + "<br/>";
-				informacoes += arrayTrab.getAno() + "<br/>";
-				informacoes += arrayTrab.getGenero() + "<br/>";
+				informacoes += "Titulo: "+arrayTrab.getTitulo() + "<br/>";
+				informacoes += "Ano: "+arrayTrab.getAno() + "<br/>";
+				informacoes += "Genero: "+generos.get(i).getTitulo()+ "<br/>";
 				informacoes += "</html>";
 				JLabel informacaoTrab = new JLabel(informacoes);
 				JPanel panelesq = new JPanel();
@@ -172,9 +183,19 @@ public class TelaTrabalho extends JFrame {
 					}
 				});
 				
+				JButton avaliacoesButton = new JButton("Ver avaliacoes");
+				verAvaliacoes.add(i,avaliacoesButton);
+				(verAvaliacoes.get(i)).addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaVerAvaliacoes telaAvaliacoes = new TelaVerAvaliacoes(arrayTrab);
+						telaAvaliacoes.desenhaNaTelaTodos();
+					}
+				});
+				
 				JPanel paneldir = new JPanel();
 				paneldir.setLayout(new BorderLayout());
 				paneldir.add(avaliar.get(i), BorderLayout.WEST);
+				paneldir.add(verAvaliacoes.get(i), BorderLayout.EAST);
 				panelsDir.add(i,paneldir);
 				i++;
 			}
@@ -190,13 +211,13 @@ public class TelaTrabalho extends JFrame {
 	public void ajustaTela(int num_usuarios){
 		if (num_usuarios <= 7) {
 			if(num_usuarios <=2)
-				this.setBounds(screensize.width / 3, screensize.height / 6, 500, 250);	
+				this.setBounds(screensize.width / 3, screensize.height / 6, 600, 250);	
 			else
-				this.setBounds(screensize.width / 3, screensize.height / 6, 500, 200 + (num_usuarios * 50));
+				this.setBounds(screensize.width / 3, screensize.height / 6, 600, 200 + (num_usuarios * 50));
 			this.repaint();
 		}
 		else{
-			this.setBounds(screensize.width / 3, screensize.height / 30, 500, 700);
+			this.setBounds(screensize.width / 3, screensize.height / 30, 600, 700);
 			this.repaint();
 		}
 	}

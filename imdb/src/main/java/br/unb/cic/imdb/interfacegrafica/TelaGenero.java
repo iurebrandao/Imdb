@@ -64,7 +64,7 @@ public class TelaGenero extends JFrame {
 		this.add(p, BorderLayout.CENTER);
 		this.setVisible(true);
 		if(numGeneros < 1)
-			JOptionPane.showMessageDialog(null, "Sem generos para mostrar!","Sem trabalhos",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Sem generos para mostrar!","Sem generos",JOptionPane.WARNING_MESSAGE);
 		else
 			ajustaTela(numGeneros);
 
@@ -123,8 +123,8 @@ public class TelaGenero extends JFrame {
 	public void adicionarGeneroNoPanel(int numero) {
 		if(numero < 1){
 			String informacoes = "<html>";
-			informacoes += genero.getTitulo() + "<br/>";
-			informacoes += genero.getDescricao() + "<br/>";
+			informacoes += "Genero: "+genero.getTitulo() + "<br/>";
+			informacoes += "Descricao: "+genero.getDescricao() + "<br/>";
 			informacoes += "</html>";
 			JLabel informacaoAutor = new JLabel(informacoes);
 			JPanel panelesq = new JPanel();
@@ -139,20 +139,9 @@ public class TelaGenero extends JFrame {
 			for(Genero arrayGeneros:listaDeGeneros){
 				
 				String informacoes = "<html>";
-				listaDeTrabalhos = arrayGeneros.getTrabalhoArtistico();
-				listaDeFilmes = arrayGeneros.getFilme();
+				informacoes += "Genero: "+arrayGeneros.getTitulo() + "<br/>";
+				informacoes += "Descricao: "+arrayGeneros.getDescricao() + "<br/>";
 				
-				informacoes += arrayGeneros.getTitulo() + "<br/>";
-				informacoes += arrayGeneros.getDescricao() + "<br/>";
-				
-				for(TrabalhoArtistico arrayTrab:listaDeTrabalhos){
-					informacoes += arrayTrab.getTitulo()+ "<br/>";
-				}
-				for(Filme arrayFilme:listaDeFilmes){
-					informacoes += arrayFilme.getTitulo()+ "<br/>";
-				}
-				
-				informacoes += arrayGeneros.getTrabalhoArtistico() + "<br/>";
 				informacoes += "</html>";
 				JLabel informacaoAutores = new JLabel(informacoes);
 				JPanel panelesq = new JPanel();

@@ -26,7 +26,6 @@ public class DAOAvaliacaoJPA implements DAOAvaliacao {
 			System.err.println("Falha ao enviar a avaliacao!");
 			return false;
 		}
-		
 	}
 
 	@Override

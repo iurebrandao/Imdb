@@ -60,7 +60,7 @@ public class TelaAutor extends JFrame{
 		this.add(p, BorderLayout.CENTER);
 		this.setVisible(true);
 		if(numAutores < 1)
-			JOptionPane.showMessageDialog(null, "Sem autores para mostrar!","Sem trabalhos",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Sem autores para mostrar!","Sem autores",JOptionPane.WARNING_MESSAGE);
 		else
 			ajustaTela(numAutores);
 	}
@@ -118,8 +118,8 @@ public class TelaAutor extends JFrame{
 	public void adicionarAutorNoPanel(int numero) {
 		if(numero < 1){
 			String informacoes = "<html>";
-			informacoes += autor.getNome() + "<br/>";
-			informacoes += autor.getDescricao() + "<br/>";
+			informacoes += "Autor: "+autor.getNome() + "<br/>";
+			informacoes += "Descricao: "+autor.getDescricao() + "<br/>";
 			informacoes += "</html>";
 			JLabel informacaoAutor = new JLabel(informacoes);
 			JPanel panelesq = new JPanel();
@@ -135,8 +135,8 @@ public class TelaAutor extends JFrame{
 				
 				String informacoes = "<html>";
 				
-				informacoes += arrayAutores.getNome() + "<br/>";
-				informacoes += arrayAutores.getDescricao() + "<br/>";
+				informacoes += "Autor: "+arrayAutores.getNome() + "<br/>";
+				informacoes += "Descricao: "+arrayAutores.getDescricao() + "<br/>";
 				informacoes += "</html>";
 				JLabel informacaoAutores = new JLabel(informacoes);
 				JPanel panelesq = new JPanel();

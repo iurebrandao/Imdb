@@ -31,7 +31,6 @@ public class TelaAvaliar extends JFrame{
 	public void desenharTela(){
 		
 		this.setLayout(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JLabel notas = new JLabel("Avaliacao:");
 		notas.setBounds(135,10,270,30);
 		aval1 = new JButton("1");
@@ -76,7 +75,6 @@ public class TelaAvaliar extends JFrame{
 		
 		enviar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(avaliar+" | "+comentario.getText());
 				avaliacao.setAvalicao(avaliar);
 				avaliacao.setComentario(comentario.getText());
 				avaliacao.setUsuario(usuario);
